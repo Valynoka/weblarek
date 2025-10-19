@@ -102,3 +102,11 @@ Presenter - презентер содержит основную логику п
 
 Интерфейс продукта:
 
+'interface IProduct {
+  id: string;
+  description: string;
+  image: string;
+  title: string;
+  category: string;
+  price: number | null;
+}'
