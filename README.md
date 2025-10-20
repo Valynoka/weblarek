@@ -230,6 +230,8 @@ interface IOrder {
   setEmail(email: string): void - записываем адрес электронной почты.
   setPhone(phone: string): void - записываем номер телефона клиента.
   setAdress(address: string): void - записываем адрес доставки товра. 
+  setAllByuersData(payment: 'Online' | 'Offline', email: string, phone: string, address: string): void -  записываем (возвращаем)
+  все значения за один вызов.
   validateData(): ValidationResult - проверяем корректные ли данные были введены. 
   getBuyerData(): IByuer - записываем (возвращаем) данные о покупателе. 
   clearBuyerData(): void - очищаем форму. 
