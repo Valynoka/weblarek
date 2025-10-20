@@ -213,10 +213,10 @@ interface IOrder {
 
 Поля:
   ```
-  payment: 'Online' | 'Offline' | undefind;
-  email: string;
-  phone: string;
-  address: string;
+  payment: 'Online' | 'Offline' | undefind - способо оплаты.
+  email: string - адрес электронной почты пользователя.
+  phone: string - номер телефона пользователя. 
+  address: string - физический адрес доставки товара. 
   ``` 
 
 Конструктор:
@@ -226,12 +226,14 @@ interface IOrder {
 
 Методы:
   ```
-
+  setPayment(payment: 'Online' | 'Offline'): void - записываем способ оплаты. 
+  setEmail(email: string): void - записываем адрес электронной почты.
+  setPhone(phone: string): void - записываем номер телефона клиента.
+  setAdress(address: string): void - записываем адрес доставки товра. 
+  validateData(): ValidationResult - проверяем корректные ли данные были введены. 
+  getBuyerData(): IByuer - записываем (возвращаем) данные о покупателе. 
+  clearBuyerData(): void - очищаем форму. 
   ``` 
-
-Проверка данных
-Получение данных
-Сохранение данных
 # }
 
 ### Слой коммуникаций
