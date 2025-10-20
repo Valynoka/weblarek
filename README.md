@@ -158,8 +158,12 @@ interface IOrder {
 о товаре. 
 
 Объекты:
-  ```products: IProduct[]``` - Массив товаров
-  ```selectProduct: IProduct | null``` - Выбранная карточка или null, если товара нет. 
+  ```
+  products: IProduct[]
+  ``` - Массив товаров
+  ```
+  selectProduct: IProduct | null
+  ``` - Выбранная карточка или null, если товара нет. 
 
 Конструктор:
   ```constructor()``` - создает пустой каталог товаров
@@ -170,7 +174,7 @@ interface IOrder {
   ```setSelectedProduct(selectProduct: IProduct):void``` - сохраняем карточку товара. 
   ```getSelctedProduts():IProduct | null``` - получаем (возвращаем) выбранную карточку (для изучения).
   ```getProductById():IProduct | undefinde``` - полчаем карточку на основании поиска ее по идентификатору. 
-}
+# }
 
 Корзина 
 
