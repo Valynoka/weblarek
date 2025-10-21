@@ -125,7 +125,7 @@ interface IProduct {
 
 ```
 interface IBuyer {
-  payment: 'Online' | 'Offline' | undefind;
+  payment: 'Online' | 'Offline' | undefined;
   email: string;
   phone: string;
   address: string;
@@ -213,7 +213,7 @@ interface IOrder {
 
 Поля:
   ```
-  payment: 'Online' | 'Offline' | undefind - способо оплаты.
+  payment: 'Online' | 'Offline' | undefined - способо оплаты.
   email: string - адрес электронной почты пользователя.
   phone: string - номер телефона пользователя. 
   address: string - физический адрес доставки товара. 
@@ -239,3 +239,5 @@ interface IOrder {
 # }
 
 ### Слой коммуникаций
+
+
