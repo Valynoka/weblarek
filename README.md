@@ -258,5 +258,5 @@ interface IOrder {
   getProductList(): Promise<IProduct[]>
   postOrder(order: IOrder): Promise<OrderResult>
   ``` 
-# }
+}
 
