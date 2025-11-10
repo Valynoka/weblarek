@@ -15,13 +15,14 @@ export class Catalog {
   getProducts():IProduct[] {
     return this.products;
   }
-  setSelectedProduct(product: IProduct):void {
+  setSelectedProduct(product: IProduct | null):void {
     this.selectProduct = product;
   }
   getSelctedProduts():IProduct | null {
     return this.selectProduct;
   }
-  getProductById():IProduct | null {
-    return this.selectProduct;
+  getProductById(id: string):IProduct | undefined {
+    const necessaryId = this.products.find((product) => product.id === id)
+    return necessaryId;
   } 
 }

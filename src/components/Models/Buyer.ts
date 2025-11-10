@@ -22,10 +22,10 @@ export class Buyer {
   setPhone(phone: string): void {
     this.phone = phone;
   }
-  setAdress(address: string): void {
+  setAddress(address: string): void {
     this.address = address;
   }
-  setAllByuersData(
+  setAllBuyersData(
     payment: "Online" | "Offline",
     email: string,
     phone: string,

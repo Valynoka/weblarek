@@ -21,20 +21,27 @@ export interface IBuyer {
     address: string;
 } 
 
-export type Order = {
-    id: string;
-    total: number;
-}
-
-export interface IOrder extends IBuyer {
-    total: number;
-    stuffs: string[];
-}
-
 export type ValidationResult = {
     payment?: string;
     email?: string;
     phone?: string;
     address?: string;
+}
+
+//Интерфесы для обменивания данным посредством Api
+//Ответ на запрос списка заказов
+export interface IOrderListResponse {
+    total: number;
+    stuffs: IProduct[];
+}
+//Ответ на запрос отдельного заказа
+export interface IOrderResponse {
+    id: string;
+    total: number;
+}
+//Создаем новый заказ (массив)
+export interface IOrderRequest extends IBuyer {
+    total: number;
+    stuffs: string[];
 }
 
