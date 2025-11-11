@@ -41,13 +41,13 @@ export class Buyer {
     if (!this.payment) {
       error.payment = "Не выбран способ оплаты";
     }
-    if (!this.email) {
+    if (!this.email || this.email.trim() === '') {
       error.email = "Не введен адрес электронной почты";
     }
-    if (!this.phone) {
+    if (!this.phone || this.phone.trim() === '') {
       error.phone = "Не введен номер телефона";
     }
-    if (!this.address) {
+    if (!this.address || this.address.trim() === '') {
       error.address = "Не введен адрес";
     }
     return error;

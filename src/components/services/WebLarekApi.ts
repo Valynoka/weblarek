@@ -9,7 +9,7 @@ export class WebLarekApi {
   //получаем список заказов с сервера
   async getProducts(): Promise<IProduct[]> {
     const response = await this.api.get<IOrderListResponse>('/product');
-    return response.stuffs;
+    return response.items;
   }
   //направляем заказ на сервер
   createOrder(order: IOrderRequest): Promise<IOrderResponse> {

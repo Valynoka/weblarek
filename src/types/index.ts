@@ -32,7 +32,7 @@ export type ValidationResult = {
 //Ответ на запрос списка заказов
 export interface IOrderListResponse {
     total: number;
-    stuffs: IProduct[];
+    items: IProduct[];
 }
 //Ответ на запрос отдельного заказа
 export interface IOrderResponse {
@@ -42,6 +42,6 @@ export interface IOrderResponse {
 //Создаем новый заказ (массив)
 export interface IOrderRequest extends IBuyer {
     total: number;
-    stuffs: string[];
+    items: string[];
 }
 

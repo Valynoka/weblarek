@@ -41,6 +41,23 @@ console.log('Адрес:',buyerData.address);
 console.log('Электронная почта:',buyerData.email);
 console.log('Способ оплаты:',buyerData.payment);
 console.log('Номер телефона:',buyerData.phone);
+//Валидация
+const validation = buyerModel.validateData();
+if (validation.email) {
+  console.log('Ошибка:',validation.email)
+} else {
+  console.log('Email валиден')
+}
+if (validation.phone) {
+  console.log('Ошибка:',validation.phone)
+} else {
+  console.log('Телефон валиден')
+}
+if (validation.address) {
+  console.log('Ошибка:',validation.address)
+} else {
+  console.log('Адрес валиден')
+}
 
 //Запрос каталога с сервера
 const api = new Api(API_URL);
