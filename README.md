@@ -20,14 +20,14 @@
 
 ```
 npm install
-npm run dev
+npm run start
 ```
 
 или
 
 ```
 yarn
-yarn dev
+yarn start
 ```
 ## Сборка
 
@@ -97,4 +97,470 @@ Presenter - презентер содержит основную логику п
 `on<T extends object>(event: EventName, callback: (data: T) => void): void` - подписка на событие, принимает название события и функцию обработчик.  
 `emit<T extends object>(event: string, data?: T): void` - инициализация события. При вызове события в метод передается название события и объект с данными, который будет использован как аргумент для вызова обработчика.  
 `trigger<T extends object>(event: string, context?: Partial<T>): (data: T) => void` - возвращает функцию, при вызове которой инициализируется требуемое в параметрах событие с передачей в него данных из второго параметра.
+
+#### Данные
+
+## Интерфейс продукта:
+
+```
+interface IProduct {
+  id: string;
+  description: string;
+  image: string;
+  title: string;
+  category: string;
+  price: number | null;
+}
+```
+Описываем массив того, что входит в состав товара:
+
+- id: уникальный идетификатор товара.
+- description: описание товара. 
+- image: изображение товара. 
+- title: наименование товара. 
+- category: категория к которой относится товар. 
+- price: стоимость товара, которая может отсутсвовать поэтому null.
+
+## Интерфейс покупателя:
+
+```
+interface IBuyer {
+  payment: 'Online' | 'Offline' | undefined;
+  email: string;
+  phone: string;
+  address: string;
+} 
+```
+Описываем массив того, что входит в состав товара:
+
+- payment: способ оплаты - тут может быть, как наличный расчет cash, так и безналичный card.
+- email: адрес электронный почты клиента. 
+- phone: номер телефона клиента. 
+- address: адрес клиента, куда доставлять товар. 
+
+## Интерфейс заказа:
+
+```
+interface IOrder {
+  id: string;
+  total: number
+}
+```
+Описываем, данные представленные в заказе:
+- id: уникальный идетификатор заказа.
+- total: итоговая стоимость объектов в заказе.  
+
+## Модели данных
+
+# class Catalog {
+Отвечает за харанение и управление карточками товара. Посредством каталога мы можем получить доступ, как
+ко всему списку товаров, так и провалиться в конкретную карточку, чтобы получить более подробную информацию
+о товаре. 
+
+Поля:
+  ```
+  products: IProduct[] - Массив товаров.
+  selectProduct: IProduct | null - Выбранная карточка или null, если товара нет. 
+  ``` 
+
+Конструктор:
+  ```
+  constructor() - создает пустой каталог товаров.
+  ``` 
+
+Методы:
+  ```
+  setProducts(products: IProduct[]):void - сохраняет список товаров.
+  getProducts():IProduct[] - получаем (возвращает) список товаров.
+  setSelectedProduct(product: IProduct):void - сохраняем карточку товара. 
+  getSelctedProduts():IProduct | null - получаем (возвращаем) выбранную карточку (для изучения).
+  getProductById():IProduct | undefinde - полчаем карточку на основании поиска ее по идентификатору. 
+  ``` 
+# }
+
+# class ShoppingСard {
+Класс предназначен для управления товарами, который покупатель выбрал для приобретения. 
+Данный класс содержит методы для: добавения, удаления, подсчет количества товаров, их стоимость и
+выяснения наличия.
+
+Поля:
+  ```
+  stuff: IProduct[] - Массив товаров в корзине.
+  ``` 
+
+Конструктор:
+  ```
+  constructor() - создает пустую корзину.
+  ``` 
+
+Методы:
+  ```
+  addStuff(product: IProduct):void - добавляем товар в карзину.
+  dellStuff(productId: string):void - удаляем товар из корзины (нам необходимо найти его по id). 
+  getCountStuffs():number - считаем кол-во товаров в корзине. 
+  getStuffs():IProduct[] - получаем (возвращает) список товаров в корзине. 
+  getPriceStuffs():number - получает (возвращаем) общую стоимость корзины. 
+  availableStuff(productId: string):boolean - получаем информацию о наличии товара, который мы положили в корзину по id.
+  ``` 
+# }
+
+# class Buyer {
+Данный класс направлен на то, чтобы обеспечить управление данным, полученным от клиента:
+- их получени;
+- их провека;
+- их сохранение;
+- установка способов оплаты. 
+
+Поля:
+  ```
+  payment: 'Online' | 'Offline' | undefined - способо оплаты.
+  email: string - адрес электронной почты пользователя.
+  phone: string - номер телефона пользователя. 
+  address: string - физический адрес доставки товара. 
+  ``` 
+
+Конструктор:
+  ```
+  constructor() - создает пустой объет без данных покупателя.
+  ``` 
+
+Методы:
+  ```
+  setPayment(payment: 'Online' | 'Offline'): void - записываем способ оплаты. 
+  setEmail(email: string): void - записываем адрес электронной почты.
+  setPhone(phone: string): void - записываем номер телефона клиента.
+  setAdress(address: string): void - записываем адрес доставки товра. 
+  setAllByuersData(payment: 'Online' | 'Offline', email: string, phone: string, address: string): void -  записываем (возвращаем)
+  все значения за один вызов.
+  validateData(): ValidationResult - проверяем корректные ли данные были введены. 
+  getBuyerData(): IByuer - записываем (возвращаем) данные о покупателе. 
+  clearBuyerData(): void - очищаем форму. 
+  ``` 
+# }
+
+### Слой коммуникаций
+
+# class Cpmmunication {
+Взаимодействие приложения с сервером, посредством Api.
+
+Поля:
+  ```
+  protected api: IApi - поле реализующее запрос. 
+  ``` 
+
+Конструктор:
+  ```
+  constructor(api: IApi) - принимаем объект для реализации интерфейс Api.
+  ``` 
+
+Методы:
+  ```
+  getProductList(): Promise<IProduct[]>
+  postOrder(order: IOrder): Promise<OrderResult>
+  ``` 
+}
+
+### Тестирование моделей и запросов
+
+### Представление View
+Каждый класс представления отвечает за конкретный блок разметки (по сути одноименный). 
+Предсталение только отрисовывает изменения, но не хранит данные и не содержит в себе логику.
+Поместим данные классы в папку представления - View 
+Начнем разбирать нашу страницу:
+
+# class Header {
+  В шапке страницы у нас хранится лого, которое никуда не возвращает 
+  и корзина, рядом с которой расположлся счетчик товаров
+
+Поля:
+  ```
+  .header__basket - корзина - HTMLButtonElement.
+  .header__basket-counter - счетчик корзины - HTMLElement.
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и действия - 
+  нажатие на корзину через обработчик конструктора
+  ``` 
+
+Методы:
+  ```
+  setCounter(value: number) - принимает число заказов
+  ``` 
+}
+
+# class Gallery {
+  Данный класс необходим для того, чтобы разместить в нем, а в будущем отобразить
+  наши карточки товаров.
+
+  Поля:
+  ```
+  .gallery - контейнер карточек - HTMLElement.
+  ``` 
+
+Конструктор:
+  ```
+  constructor(container: HTMLElement) - принимает элемент разметки
+  ``` 
+
+Методы:
+  ```
+  setCardsArr(arr: HTMLElement[]) - принимает массив карточек (элементов разметки)
+  ``` 
+}
+
+# class Modal {
+  Назаначение данного класса заключается в том, чтобы отобразить модальные окна, 
+  которые присутсвуют у нас на странице, а также их закрывать.
+
+    Поля:
+  ```
+  .modal - модальное окно - HTMLElement.
+  .modal__close - закрытие модального окна - HTMLButtonElement
+  .modal__content - содержимое модального окна - HTMLElement.
+  ``` 
+
+Конструктор:
+  ```
+  constructor(container: HTMLElement, events: IEvents ) - принимает элемент разметки и производит
+  действия - закрытия и открытия окна
+  ``` 
+
+Методы:
+  ```
+  setData(element: HTMLElement) - принимает полученные\введеные данные
+  open() - открытие модального окна
+  close() - закрытие модального окна
+  ``` 
+}
+
+# class OrderSuccess {
+  Модальное окно, демонстрирующее результат заказов
+
+    Поля:
+  ```
+  .order-success__title - заголовок заказа - HTMLElement.
+  .order-success__description - описание заказа - HTMLElement.
+  .order-success__close - закрытие модального окна - HTMLButtonElement.
+  ``` 
+
+Конструктор:
+  ```
+  constructor(container: HTMLElement, events: IEvents ) - принимает элемент разметки и производит
+  действия - закрытия и открытия окна
+  ``` 
+
+Методы:
+  ```
+  setTotal(value: number) - отображение списанных средств
+  close() - закрытие окна заказа
+  ``` 
+}
+
+# class Сard {
+  Раздел содержит в себе данные всех карточек
+
+    Поля:
+  ```
+  titleElement - заголовок товара - HTMLElement.
+  priceElement - цена товара - HTMLElement.
+  id: string - идентификатор товара, строка.
+  ``` 
+
+Конструктор:
+  ```
+  constructor(container: HTMLElement) - принимает элемент разметки
+  ``` 
+
+Методы:
+  ```
+  getId() - получает id товара
+  setId(id: string) - устанавливает id товара
+  setTitle(value: string) - устанавливает заголовок товара
+  setPrice(value: number | null) - устанавливает цену товара
+  ``` 
+}
+
+# class СardСatalog {
+  Раздел расширяет функционал card, поскольку призван отразить карточку товара в каталоге
+
+    Поля:
+  ```
+  .card__title - заголовок товара - HTMLElement.
+  .card__category - описание товара - HTMLElement.
+  .card__image - изображение товара - HTMLImageElement
+  .card__price - есть уже в Карточке
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и производит действия
+  ``` 
+
+Методы:
+  ```
+  setCategory(value: string) - устанавливает описательную часть категории товара
+  setImage(img: HTMLImageElement, url: string, alt?: string) - ссылка на изображение
+  ``` 
+}
+
+# class СardPreview {
+  Раздел расширяет функционал card, поскольку призван выводит карточку товара в модальное окно
+
+    Поля:
+  ```
+  .card__title - заголовок товара - HTMLElement.
+  .card__text - аннотация товара - HTMLElement.
+  .card__image - изображение товара - HTMLImageElement
+  inCard - проверяем, что товар в корзине.
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и производит действие
+  ``` 
+
+Методы:
+  ```
+  setCategory(value: string) - устанавливает описательную часть категории товара
+  setText(value: string) - утанавливаем текст карточки. 
+  setInCard(value: boolean) - удостоверяемся, что товар есть в карточке, если есть то:
+  desaibleButton() - от ключаем кнопуку.
+  setImage(value: string) - ссылка на изображение
+  updateButtonState() - обновляем статус кнопки - кнопка активна\неактивна
+  ``` 
+}
+
+# class CardBasket {
+  Раздел отображает данные о товаре в корзине
+
+    Поля:
+  ```
+  .basket__item-indexn - нумерация товаров в корзине - HTMLElement
+  .card__title - заголовок - HTMLElement
+  .card__price - цена за товар -  HTMLElement
+  .basket__item-delete - кнопка удаления товара - HTMLButtonElement
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и производит действие
+  ``` 
+
+Методы:
+  ```
+  setIndex(value: number) - устанавливает нумерацию товара
+  ``` 
+}
+
+# class Basket {
+  Раздел отображает данные о товаре в корзине
+
+    Поля:
+  ```
+  .basket__list - список товаров в корзине - HTMLElement
+  .basket__button - оформление заказа - HTMLButtonElement
+  .basket__price - общая стоимость - HTMLElement
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и производит действие
+  ``` 
+
+Методы:
+  ```
+  setIems(value: number) - устанавливает список товара
+  setTotalPrice(value: number) - устанавливает общую сумму товаров
+  ``` 
+}
+
+# class Form {
+  Раздел объединяет все формы
+
+    Поля:
+  ```
+  .form - сама форма - HTMLElement
+  .form__input - раздел для ввода информации в input - HTMLElement
+  .button - кнопка активации действия - HTMLButtonElement
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и производит действие
+  ``` 
+
+Методы:
+  ```
+  setIsButtonActiv(value: boolean) - устанавливаем, когда кнопка активна, а когда нет
+  setFormError(text: string) - прописываем ошибку
+  ``` 
+}
+
+# class ОrderForm {
+  Раздел формы заказа
+
+    Поля:
+  ```
+  .order__buttons - кнопка выбора формы оплаты cashButton\cardButton - HTMLButtonElement
+  .form__input - раздел для ввода адреса доставки в input - HTMLInputElement
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и производит действие
+  ``` 
+
+Методы:
+  ```
+  setPayment(payment: TPayment): void - устанавливаем: активна кнопка или нет
+  setTypeOfPayment(value: Tpayment) - устанавливаем карту или наличные деньги
+  setAdress(text: string) - устанавливаем адрес
+  validateForm(errors: IErrors):void - валидиируем данные
+  ``` 
+}
+
+# class СontactsForm {
+  Раздел формы, который создан, чтобы работать с телефоном и email
+
+    Поля:
+  ```
+  .form__input - раздел для ввода данных emailElement, phoneElement в input - HTMLInputElement
+  ``` 
+
+Конструктор:
+  ```
+  constructor(events: IEvents, container: HTMLElement) - принимает элемент разметки и производит действие
+  ``` 
+
+Методы:
+  ```
+  setEmail(value: string) - устанвливаем адрес эл. почты
+  setPhone(value: string) - устанавливаем номер телефона
+  validateForm(errors: IErrors):void - валидиируем данные
+  ``` 
+}
+
+### События в приложении
+
+## Список событий в utils
+
+# Модели
+- catalog:changed - меняем каталог
+- product: select - выбираем товар
+- basket: changed - изменяем содержимое корзины
+- buyer: changed - меняем данные покупателя
+
+# Представление IU:
+- card-click
+- buy-click
+- basket-add - добавить товар
+- basket-open - открыть карзину
+- basket-remove - удалить товар из карзины
+- pay - оплата
+- form-change 
+- modal-open - открыть модальное окно
+- modal-close - закрыть модальное окно
+
 
