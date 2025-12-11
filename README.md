@@ -306,7 +306,7 @@ interface IOrder {
 
 Методы:
   ```
-  setCardsArr(arr: HTMLElement[]) - принимает массив карточек (элементов разметки)
+  set galleryArr(arr: HTMLElement[]) - принимает массив карточек (элементов разметки)
   ``` 
 }
 
