@@ -11,6 +11,6 @@ export class ServerApi {
     return await this.api.get<IGetProductsListFromApiResponse>('/product');
   }
   async order(data: IOrderApiRequest): Promise<IGetOrderApiResponse> {
-    return await this.api.post('/order/', data);
+    return await this.api.post('/order', data);
   }
 }

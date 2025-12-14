@@ -1,3 +1,5 @@
+import { categoryMap } from "../utils/constants";
+
 export type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
 
 export interface IApi {
@@ -7,6 +9,13 @@ export interface IApi {
 
 //Тип выбора способов оплаты
 export type TPayment = 'card' | 'cash' | '';
+
+export type ValidationResult = {
+  payment?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+}
 //Интерфейс карточки товаров
 export interface IProduct {
   id: string;
@@ -43,3 +52,7 @@ export interface IGetOrderApiResponse {
   id: number;
   total: number;
 }
+export interface IErrorApiResponse {
+  error: string;
+}
+export type TCategoryNames = keyof typeof categoryMap;

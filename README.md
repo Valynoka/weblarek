@@ -178,7 +178,7 @@ interface IOrder {
   ``` 
 # }
 
-# class ShoppingСard {
+# class Basket {
 Класс предназначен для управления товарами, который покупатель выбрал для приобретения. 
 Данный класс содержит методы для: добавения, удаления, подсчет количества товаров, их стоимость и
 выяснения наличия.
@@ -197,14 +197,14 @@ interface IOrder {
   ```
   addStuff(product: IProduct):void - добавляем товар в карзину.
   dellStuff(productId: string):void - удаляем товар из корзины (нам необходимо найти его по id). 
-  getCountStuffs():number - считаем кол-во товаров в корзине. 
+  getTotalStuffsCount():number - считаем кол-во товаров в корзине. 
   getStuffs():IProduct[] - получаем (возвращает) список товаров в корзине. 
-  getPriceStuffs():number - получает (возвращаем) общую стоимость корзины. 
-  availableStuff(productId: string):boolean - получаем информацию о наличии товара, который мы положили в корзину по id.
+  getTotalStuffsPrice():number - получает (возвращаем) общую стоимость корзины. 
+  hasStuff(productId: string):boolean - получаем информацию о наличии товара, который мы положили в корзину по id.
   ``` 
 # }
 
-# class Buyer {
+# class Customer {
 Данный класс направлен на то, чтобы обеспечить управление данным, полученным от клиента:
 - их получени;
 - их провека;
@@ -230,11 +230,11 @@ interface IOrder {
   setEmail(email: string): void - записываем адрес электронной почты.
   setPhone(phone: string): void - записываем номер телефона клиента.
   setAdress(address: string): void - записываем адрес доставки товра. 
-  setAllByuersData(payment: 'Online' | 'Offline', email: string, phone: string, address: string): void -  записываем (возвращаем)
+  setAllCustomerData(payment: 'Online' | 'Offline', email: string, phone: string, address: string): void -  записываем (возвращаем)
   все значения за один вызов.
   validateData(): ValidationResult - проверяем корректные ли данные были введены. 
-  getBuyerData(): IByuer - записываем (возвращаем) данные о покупателе. 
-  clearBuyerData(): void - очищаем форму. 
+  getCustomerData(): IByuer - записываем (возвращаем) данные о покупателе. 
+  clearCustomerData(): void - очищаем форму. 
   ``` 
 # }
 
@@ -316,7 +316,6 @@ interface IOrder {
 
     Поля:
   ```
-  .modal - модальное окно - HTMLElement.
   .modal__close - закрытие модального окна - HTMLButtonElement
   .modal__content - содержимое модального окна - HTMLElement.
   ``` 
@@ -340,7 +339,6 @@ interface IOrder {
 
     Поля:
   ```
-  .order-success__title - заголовок заказа - HTMLElement.
   .order-success__description - описание заказа - HTMLElement.
   .order-success__close - закрытие модального окна - HTMLButtonElement.
   ``` 
@@ -359,13 +357,11 @@ interface IOrder {
 }
 
 # class Сard {
-  Раздел содержит в себе данные всех карточек
-
+  Родительский класс для иных преставлений карточек
     Поля:
   ```
-  titleElement - заголовок товара - HTMLElement.
-  priceElement - цена товара - HTMLElement.
-  id: string - идентификатор товара, строка.
+  cardTitle - заголовок товара - HTMLElement.
+  cardPrice - цена товара - HTMLElement.
   ``` 
 
 Конструктор:
@@ -384,13 +380,10 @@ interface IOrder {
 
 # class СardСatalog {
   Раздел расширяет функционал card, поскольку призван отразить карточку товара в каталоге
-
-    Поля:
+  Поля:
   ```
-  .card__title - заголовок товара - HTMLElement.
   .card__category - описание товара - HTMLElement.
   .card__image - изображение товара - HTMLImageElement
-  .card__price - есть уже в Карточке
   ``` 
 
 Конструктор:
@@ -410,10 +403,10 @@ interface IOrder {
 
     Поля:
   ```
-  .card__title - заголовок товара - HTMLElement.
-  .card__text - аннотация товара - HTMLElement.
+  .card__text - аннотация товара - HTMLElement;
+  .card__button - HTMLButtonElement
+  .card__category - HTMLElement
   .card__image - изображение товара - HTMLImageElement
-  inCard - проверяем, что товар в корзине.
   ``` 
 
 Конструктор:
@@ -428,7 +421,7 @@ interface IOrder {
   setInCard(value: boolean) - удостоверяемся, что товар есть в карточке, если есть то:
   desaibleButton() - от ключаем кнопуку.
   setImage(value: string) - ссылка на изображение
-  updateButtonState() - обновляем статус кнопки - кнопка активна\неактивна
+  buttonText() - обновляем статус кнопки - кнопка активна\неактивна
   ``` 
 }
 
@@ -438,8 +431,6 @@ interface IOrder {
     Поля:
   ```
   .basket__item-indexn - нумерация товаров в корзине - HTMLElement
-  .card__title - заголовок - HTMLElement
-  .card__price - цена за товар -  HTMLElement
   .basket__item-delete - кнопка удаления товара - HTMLButtonElement
   ``` 
 
@@ -481,8 +472,7 @@ interface IOrder {
 
     Поля:
   ```
-  .form - сама форма - HTMLElement
-  .form__input - раздел для ввода информации в input - HTMLElement
+  .form__error - HTMLElement
   .button - кнопка активации действия - HTMLButtonElement
   ``` 
 
