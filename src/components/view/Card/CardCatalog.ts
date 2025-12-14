@@ -21,7 +21,7 @@ export class CardCatalog extends Card<TCardCatalog> {
     }
   }
   //тут вызовем модификатор из Card, который мы там писали
-  set categoryOfCard(category: TCategoryNames) {
+  set category(category: TCategoryNames) {
     const modOfClassCard = Card.getCategoryClassByCategoryName(category);
     this.cardCategory.textContent = category;
     this.cardCategory.className = `card__category ${modOfClassCard}`;

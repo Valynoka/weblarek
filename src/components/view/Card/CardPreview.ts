@@ -34,6 +34,8 @@ export class CardPreview extends Card<TCardPreview>{
     this.cardCategory.textContent = category;
     this.cardCategory.className = `card__category ${classModOfCategory}`;
   }
+  //сетер уже был верным наименование text - сетер и text данные.
+  //вроде все работает верно
   set text(text: string) {
     this.cardText.textContent = text;
   }

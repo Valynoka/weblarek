@@ -14,12 +14,12 @@ export class Card<T> extends Component<TCardData & T>{
     this.cardTitle = ensureElement<HTMLElement>('.card__title', this.container);
     this.cardPrice = ensureElement<HTMLElement>('.card__price', this.container);
   }
-  set titleCard(title: string) {
+  set title(title: string) {
     this.cardTitle.textContent = title;  
   };
 
-  set priceCard(price: number | null) {
-    this.cardPrice.textContent = price  === null ? `${price} синапсов` : 'Бесценно';
+  set price(price: number | null) {
+    this.cardPrice.textContent = price ? `${price} синапсов` : 'Бесценно';
   }
 
   //Можно, конечно в CardCatalog прописывать сразу модификатор по типу card__category_soft, но показалось, 
