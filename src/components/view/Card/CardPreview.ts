@@ -36,8 +36,8 @@ export class CardPreview extends Card<TCardPreview>{
   }
   //сетер уже был верным наименование text - сетер и text данные.
   //вроде все работает верно
-  set text(text: string) {
-    this.cardText.textContent = text;
+  set description(description: string) {
+    this.cardText.textContent = description;
   }
   set inCard(inCard: boolean) {
     this.cardButton.disabled = !inCard;
